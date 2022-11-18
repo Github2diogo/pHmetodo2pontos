@@ -1,0 +1,124 @@
+
+<script>
+
+// variáveis
+var R = 8.314462618 // em J/mol*K
+var F = 96485.33 // em C/mol
+var T = 25 // em °C
+
+var kPhMaior = 2
+var kPhMaior = 2
+
+
+calculo = function()
+{
+
+    //  pH maior
+        var phMaior = document.getElementById('metodo2pontos_i8').value;
+        
+        var eMaior = (
+        document.getElementById('metodo2pontos_i14').value +
+        document.getElementById('metodo2pontos_i15').value +
+        document.getElementById('metodo2pontos_i16').value
+        )/3;
+
+        var uPhMaior = document.getElementById('metodo2pontos_i9').value;
+
+
+    // pH Menor
+        var phMenor = document.getElementById('metodo2pontos_i11').value;
+        
+        var eMenor = (
+        document.getElementById('metodo2pontos_i18').value +
+        document.getElementById('metodo2pontos_i19').value +
+        document.getElementById('metodo2pontos_i20').value
+        )/3;
+        
+        var uPhMenor = document.getElementById('metodo2pontos_i12').value;
+
+
+    // E(x)
+        var eX = (
+        document.getElementById('metodo2pontos_i22').value +
+        document.getElementById('metodo2pontos_i23').value +
+        document.getElementById('metodo2pontos_i24').value
+        )/3;
+
+        var kLinha = (eMaior - eMenor)/(phMaior - phMenor);
+
+        var pHx = phMaior - (eMaior - eX)/kLinha;
+
+
+
+
+    document.getElementById('a3').value = parseInt(resources)*parseInt(minutes);
+     
+   }
+</script>
+
+<!-- //////////////////////////////////////////////////////////////// -->
+<div>Método dois pontos</div>
+<div>&nbsp</div>
+
+<div>MRC pH (maior) <input id="metodo2pontos_i8" type="text" /></div>
+<div>U pH (maior) <input id="metodo2pontos_i9" type="text" /></div>
+<div>&nbsp</div>
+<div>&nbsp</div>
+
+
+<div>MRC pH (maior) <input id="metodo2pontos_i8" type="text" /></div>
+<div>U pH (maior) <input id="metodo2pontos_i9" type="text" /></div>
+<div>&nbsp</div>
+
+<div>MRC pH (menor) <input id="metodo2pontos_i11" type="text" /></div>
+<div>U pH (menor) <input id="metodo2pontos_i12" type="text" /></div>
+<div>&nbsp</div>
+
+<div>Leitura 1 pH (maior) em mV <input id="metodo2pontos_i14" type="text" /></div>
+<div>Leitura 2 pH (maior) em mV <input id="metodo2pontos_i15" type="text" /></div>
+<div>Leitura 3 pH (maior) em mV <input id="metodo2pontos_i16" type="text" /></div>
+<div>&nbsp</div>
+
+<div>Leitura 1 pH (menor) em mV <input id="metodo2pontos_i18" type="text" /></div>
+<div>Leitura 2 pH (menor) em mV <input id="metodo2pontos_i19" type="text" /></div>
+<div>Leitura 3 pH (menor) em mV <input id="metodo2pontos_i20" type="text" /></div>
+<div>&nbsp</div>
+
+<div>Leitura 1 pH (X) em mV <input id="metodo2pontos_i22" type="text" /></div>
+<div>Leitura 2 pH (X) em mV <input id="metodo2pontos_i23" type="text" /></div>
+<div>Leitura 3 pH (X) em mV <input id="metodo2pontos_i24" type="text" /></div>
+<div>&nbsp</div>
+
+
+<div>&nbsp</div>
+<hr>
+<div>&nbsp</div>
+
+<!-- //////////////////////////////////////////////////////////////// -->
+<div>Configurações</div>
+<div>&nbsp</div>
+
+<div>Resolução em tensão <input id="configuracoes_e5" type="text" /> mV</div>
+<div>Incerteza do termômetro <input id="configuracoes_e6" type="text" /> °C</div>
+<div>Variabilidade da temperatura <input id="configuracoes_e7" type="text" /> °C</div>
+<div>Não-linearidade da faixa <input id="configuracoes_e8" type="text" /> %</div>
+<div>Junção de referência <input id="configuracoes_e9" type="text" /> mV</div>
+
+<div>&nbsp</div>
+<hr>
+<div>&nbsp</div>
+
+
+<!-- //////////////////////////////////////////////////////////////// -->
+<!-- Cálculo -->
+
+
+
+
+
+
+
+<div>MRC pH (maior) <input id="i" type="text" /></div>
+<div>MRC pH (maior) <input id="i" type="text" /></div>
+<input id="a2" type="text" onblur="calculate()"  />
+<input id="a3" type="text" name="total_amt" />
