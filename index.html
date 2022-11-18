@@ -48,10 +48,33 @@ calculo = function()
 
         var pHx = phMaior - (eMaior - eX)/kLinha;
 
+    
+    // Incerteza k'
+    var variabilidade_eMaior = 0;
+    var resolucao_eMaior = 0;
+
+    var variabilidade_eMenor = 0;
+    var resolucao_eMenor = 0;
+
+    var cert_phMaior = 0;
+    var cert_phMenor = 0;
+
+    var variabilidade_temp = 0;
+    var cert_temp = 0;
+
+    var juncaoDeReferencia = 0;
 
 
+    // Incerteza pH(X)
+    var cert_phMaior = 0;
+    var variabilidade_eMaior = 0;
+    var resolucao_eMaior = 0;
+    
+    var variabilidade_eX = 0;
+    var resolucao_eX = 0
 
-    document.getElementById('a3').value = parseInt(resources)*parseInt(minutes);
+    var incerteza_kLinha = 0;
+    var naoLinearidadeParteEletrica = 0;
      
    }
 </script>
