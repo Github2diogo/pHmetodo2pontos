@@ -2,12 +2,14 @@
 <script>
 
 // variáveis
-var R = 8.314462618 // em J/mol*K
-var F = 96485.33 // em C/mol
-var T = 25 // em °C
+var calculo_c5_R = 8.314462618 // em J/mol*K
+var calculo_c6_F = 96485.33 // em C/mol
+var calculo_c7_T = 25 // em °C
 
-var kPhMaior = 2
-var kPhMaior = 2
+var calculo_c11_kPhMaior = 2
+var calculo_c15_kPhMenor = 2
+
+const math = require('mathjs')
 
 
 calculo = function()
@@ -48,34 +50,147 @@ calculo = function()
 
         var pHx = phMaior - (eMaior - eX)/kLinha;
 
-    
+    ////////////////////////////////////////////////////////////////
     // Incerteza k'
-    var variabilidade_eMaior = 0;
-    var resolucao_eMaior = 0;
 
-    var variabilidade_eMenor = 0;
-    var resolucao_eMenor = 0;
+    // variabilidade E (maior)
+    var leituras_eMaior = [
+        document.getElementById('metodo2pontos_i14').value,
+        document.getElementById('metodo2pontos_i15').value,
+        document.getElementById('metodo2pontos_i16').value
+    ];
+    var variabilidade_eMaior_uxi = math.std(leituras_eMaior);
+    var variabilidade_eMaior_div = Math.sqrt(4);
+    var variabilidade_eMaior_coef = Math.abs( 1/(phMaior-phMenor) );
+    var variabilidade_eMaior_ciUxi = 0;
+    var variabilidade_eMaior_uiY2 = 0;
 
-    var cert_phMaior = 0;
-    var cert_phMenor = 0;
+    // resolução E (maior)
+    var resolucao_eMaior_uxi = document.getElementById('configuracoes_e5').value/2;
+    var resolucao_eMaior_div = Math.sqrt(3);
+    var resolucao_eMaior_coef = variabilidade_eMaior_coef;
+    var resolucao_eMaior_ciUxi = 0;
+    var resolucao_eMaior_uiY2 = 0;
 
-    var variabilidade_temp = 0;
-    var cert_temp = 0;
 
-    var juncaoDeReferencia = 0;
-
-
-    // Incerteza pH(X)
-    var cert_phMaior = 0;
-    var variabilidade_eMaior = 0;
-    var resolucao_eMaior = 0;
+    // variabilidade E (menor)
+    var leituras_eMenor = [
+        document.getElementById('metodo2pontos_i18').value,
+        document.getElementById('metodo2pontos_i19').value,
+        document.getElementById('metodo2pontos_i20').value
+    ];
+    var variabilidade_eMenor_uxi = math.std(leituras_eMenor);
+    var variabilidade_eMenor_div = Math.sqrt(4);
+    var variabilidade_eMenor_coef = variabilidade_eMaior_coef;
+    var variabilidade_eMenor_ciUxi = 0;
+    var variabilidade_eMenor_uiY2 = 0;
     
-    var variabilidade_eX = 0;
-    var resolucao_eX = 0
+    // resolução E (menor)
+    var resolucao_eMenor_uxi = resolucao_eMaior_uxi;
+    var resolucao_eMenor_div = Math.sqrt(3);
+    var resolucao_eMenor_coef = variabilidade_eMaior_coef;
+    var resolucao_eMenor_ciUxi = 0;
+    var resolucao_eMenor_uiY2 = 0;
 
-    var incerteza_kLinha = 0;
-    var naoLinearidadeParteEletrica = 0;
-     
+
+    // Cert pH (maior)
+    var cert_phMaior_uxi = uPhMaior;
+    var cert_phMaior_div = calculo_c11_kPhMaior;
+    var cert_phMaior_coef = Math.abs((eMaior-eMenor)/(phMaior-phMenor)^2);
+    var cert_phMaior_ciUxi = 0;
+    var cert_phMaior_uiY2 = 0;
+
+    // Cert pH (menor)
+    var cert_phMenor_uxi = uPhMenor;
+    var cert_phMenor_div = calculo_c15_kPhMenor;
+    var cert_phMenor_coef = cert_phMaior_coef;
+    var cert_phMenor_ciUxi = 0;
+    var cert_phMenor_uiY2 = 0;
+
+    // variabilidade Temp
+    var variabilidade_temp_uxi = document.getElementById('configuracoes_e7').value;
+    var variabilidade_temp_div = Math.sqrt(3);
+    var variabilidade_temp_coef = calculo_c5_R * Math.log(10) * 1000/calculo_c6_F;
+    var variabilidade_temp_ciUxi = 0;
+    var variabilidade_temp_uiY2 = 0;
+
+    // Cert. Temp
+    var cert_temp_uxi = document.getElementById('configuracoes_e6').value;
+    var cert_temp_div = 2;
+    var cert_temp_coef = variabilidade_temp_coef;
+    var cert_temp_ciUxi = 0;
+    var cert_temp_uiY2 = 0;
+
+
+    // Junção de referência
+    var juncaoDeReferencia_uxi = document.getElementById('configuracoes_e9').value;
+    var juncaoDeReferencia_div = Math.sqrt(3);
+    var juncaoDeReferencia_coef = variabilidade_eMaior_coef;
+    var juncaoDeReferencia_ciUxi = 0;
+    var juncaoDeReferencia_uiY2 = 0;
+
+
+    var u_kLinha = 0;
+    var k_kLinha = 0;
+
+
+    ////////////////////////////////////////////////////////////////
+    // Incerteza pH(X)
+
+    // Cert pH (maior)
+    var cert_phMaior_uxi = uPhMaior;
+    var cert_phMaior_div = calculo_c11_kPhMaior;
+    var cert_phMaior_coef = 1;
+    var cert_phMaior_ciUxi = 1;
+    var cert_phMaior_uiY2 = 1;
+    
+    // variabilidade E (maior)
+    var variabilidade_eMaior_uxi = variabilidade_eMaior_uxi;
+    var variabilidade_eMaior_div = Math.sqrt(4);
+    var variabilidade_eMaior_coef = Math.abs(1/kLinha);
+    var variabilidade_eMaior_ciUxi = Math.abs(1/kLinha);
+    var variabilidade_eMaior_uiY2 = Math.abs(1/kLinha);
+    
+    // resolução E (maior)
+    var resolucao_eMaior_uxi = resolucao_eMaior_uxi;
+    var resolucao_eMaior_div = Math.sqrt(3);
+    var resolucao_eMaior_coef = variabilidade_eMaior_coef;
+    var resolucao_eMaior_ciUxi = variabilidade_eMaior_coef;
+    var resolucao_eMaior_uiY2 = variabilidade_eMaior_coef;
+
+    // variabilidade E(x)
+    var leituras_eX = [
+        document.getElementById('metodo2pontos_i22').value,
+        document.getElementById('metodo2pontos_i23').value,
+        document.getElementById('metodo2pontos_i24').value
+    ];
+    var variabilidade_eX_uxi = math.std(leituras_eX);
+    var variabilidade_eX_div = Math.sqrt(4);
+    var variabilidade_eX_coef = variabilidade_eMaior_coef;
+    var variabilidade_eX_ciUxi = variabilidade_eMaior_coef;
+    var variabilidade_eX_uiY2 = variabilidade_eMaior_coef;
+
+    // resolução E(x)
+    var resolucao_eX_uxi = resolucao_eMaior_uxi;
+    var resolucao_eX_div = Math.sqrt(3);
+    var resolucao_eX_coef = variabilidade_eMaior_coef;
+    var resolucao_eX_ciUxi = variabilidade_eMaior_coef;
+    var resolucao_eX_uiY2 = variabilidade_eMaior_coef;
+
+    // incerteza k'
+    var incerteza_kLinha_uxi = u_kLinha;
+    var incerteza_kLinha_div = k_kLinha;
+    var incerteza_kLinha_coef = abs((eX-eMaior)/(kLinha)^2);
+    var incerteza_kLinha_ciUxi = abs((eX-eMaior)/(kLinha)^2);
+    var incerteza_kLinha_uiY2 = abs((eX-eMaior)/(kLinha)^2);
+    
+    // Não-linearidade (parte elétrica)
+    var naoLinearidadeParteEletrica_uxi = document.getElementById('configuracoes_e8').value * eX / 100;
+    var naoLinearidadeParteEletrica_div = Math.sqrt(3);
+    var naoLinearidadeParteEletrica_coef = variabilidade_eMaior_coef;
+    var naoLinearidadeParteEletrica_ciUxi = variabilidade_eMaior_coef;
+    var naoLinearidadeParteEletrica_uiY2 = variabilidade_eMaior_coef;
+
    }
 </script>
 
