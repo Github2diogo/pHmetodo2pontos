@@ -17,19 +17,9 @@
 <!-- //////////////////////////////////////////////////////////////// -->
 <div id="versao" >v. 1.0</div>
 <div id="titulo">IPT-LME m2p pH</div>
-<div>&nbsp</div>
-
-<!-- <table align="center"><tr>
-<td align="center">
-</td>
-</tr>
-</table> -->
-
-<table width="420" bgcolor="#eee" align="center"><tr><td align="center"> <!-- tabela externa -->
-
 
 <!-- //////////////////////////////////////////////////////////////// -->
-<table border="0" width="0px"><tr><td> <!-- tabela configurações -->
+<table id="tabela_configuracoes" align="center" border="0" width="0px" style="display: none;"><tr><td> <!-- tabela configurações -->
 <div class="subtitulo">Configurações</div>
 <div class='nomeCampo'>Resolução em tensão (mv) <input class='campoEntrada'  id="configuracoes_e5" type="text" value="1"/></div>
 <div class='nomeCampo'>Incerteza do termômetro (°C) <input class='campoEntrada'  id="configuracoes_e6" type="text" value="0,1"/></div>
@@ -38,7 +28,12 @@
 <div class='nomeCampo'>Junção de referência (mV) <input class='campoEntrada'  id="configuracoes_e9" type="text" value="0,6"/></div>
 </td></tr></table> <!-- tabela configurações -->
 
+<table width="420" bgcolor="#fff" align="center"><tr><td align="center"> <!-- tabela botão -->
+<input class='botao' id="botaoConfig" type ="button" value='Exibir configurações' onclick="ocultaExibeConfig()" />
+</td></tr></table> <!-- tabela botão -->
+
 <!-- //////////////////////////////////////////////////////////////// -->
+<table width="420" bgcolor="#eee" align="center"><tr><td align="center"> <!-- tabela externa -->
 <table border="0" width="0px"><tr><td> <!-- tabela entrada de dados -->
 <div class="subtitulo">Entrada de dados</div>
 
