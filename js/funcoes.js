@@ -13,6 +13,17 @@ function quadrado(numero){
     return numero*numero;
 }
 
+function ocultaExibeConfig(){
+    if (document.getElementById('tabela_configuracoes').style.display == ""){
+        document.getElementById('tabela_configuracoes').style.display = "none";
+        document.getElementById('botaoConfig').value = "Exibir configurações";
+    }
+    else{
+        document.getElementById('tabela_configuracoes').style.display = "";
+        document.getElementById('botaoConfig').value = "Ocultar configurações";
+    }
+}
+
 function desvpada(matriz){ // método n-1
     
     // calcular a média
