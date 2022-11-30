@@ -8,79 +8,107 @@
   name="viewport"
   content="width=device-width, initial-scale=1, maximum-scale=1"
 />
-<link rel="stylesheet" href="css\formatacao.css">
+<link rel="stylesheet" href="css\css.css">
 </head>
     
-<script type=text/javascript src="js\funcoes.js"></script>
+<script type=text/javascript src="js\js.js"></script>
 
 <body>
 <!-- //////////////////////////////////////////////////////////////// -->
-<div id="versao" >v. 1.0</div>
-<div id="titulo">IPT-LME m2p pH</div>
+<div id="versao" class="versao" >v. 1.0</div>
+<div id="titulo" class="titulo" >IPT-LME m2p pH</div>
 
 <!-- //////////////////////////////////////////////////////////////// -->
-<table id="tabela_configuracoes" align="center" border="0" width="0px" style="display: none;"><tr><td> <!-- tabela configurações -->
+ <!-- tabela configurações -->
+<table id="tabela_configuracoes" class="tabelaConfiguracoes" align="center" border="0" width="0px" style="display: none;"><tr><td>
 <div class="subtitulo">Configurações</div>
-<div class='nomeCampo'>Resolução em tensão (mv) <input class='campoEntrada'  id="configuracoes_e5" type="text" value="1"/></div>
-<div class='nomeCampo'>Incerteza do termômetro (°C) <input class='campoEntrada'  id="configuracoes_e6" type="text" value="0,1"/></div>
-<div class='nomeCampo'>Variabilidade da temperatura (°C) <input class='campoEntrada'  id="configuracoes_e7" type="text" value="0,1"/></div>
-<div class='nomeCampo'>Não-linearidade da faixa (%) <input class='campoEntrada'  id="configuracoes_e8" type="text" value="0,1"/></div>
-<div class='nomeCampo'>Junção de referência (mV) <input class='campoEntrada'  id="configuracoes_e9" type="text" value="0,6"/></div>
-</td></tr></table> <!-- tabela configurações -->
+<div class="nomeCampo">Resolução em tensão (mv) <input class="campoEntrada" onkeyup='verTeclado(this, event)' id="configuracoes_e5" type="text" value="1"/></div>
+<div class="nomeCampo">Incerteza do termômetro (°C) <input class="campoEntrada" onkeyup='verTeclado(this, event)' id="configuracoes_e6" type="text" value="0,1"/></div>
+<div class="nomeCampo">Variabilidade da temperatura (°C) <input class="campoEntrada" onkeyup='verTeclado(this, event)' id="configuracoes_e7" type="text" value="0,1"/></div>
+<div class="nomeCampo">Não-linearidade da faixa (%) <input class="campoEntrada" onkeyup='verTeclado(this, event)' id="configuracoes_e8" type="text" value="0,1"/></div>
+<div class="nomeCampo">Junção de referência (mV) <input class="campoEntrada" onkeyup='verTeclado(this, event)' id="configuracoes_e9" type="text" value="0,6"/></div>
+</td></tr></table>
+<!-- tabela configurações -->
 
-<table width="420" bgcolor="#fff" align="center"><tr><td align="center"> <!-- tabela botão -->
+ <!-- tabela botão oculta/exibe config -->
+<table width="420" bgcolor="#fff" align="center"><tr><td align="center">
 <input class='botao' id="botaoConfig" type ="button" value='Exibir configurações' onclick="ocultaExibeConfig()" />
-</td></tr></table> <!-- tabela botão -->
+</td></tr></table>
+<!-- tabela botão oculta/exibe config -->
 
 <!-- //////////////////////////////////////////////////////////////// -->
-<table width="420" bgcolor="#eee" align="center"><tr><td align="center"> <!-- tabela externa -->
-<table border="0" width="0px"><tr><td> <!-- tabela entrada de dados -->
+<!-- tabela externa -->
+<table width="360" bgcolor="#eee" align="center"><tr><td align="center"> 
+<!-- tabela entrada de dados -->
+<table border="0" width="0px"><tr><td>
 <div class="subtitulo">Entrada de dados</div>
 
-<div class='nomeCampo'>MRC pH (maior)<input class='campoEntrada'  id="metodo2pontos_i8" type="text" value="6.859"/></div>
-<div class='nomeCampo'>Incerteza pH (maior) <input class='campoEntrada'  id="metodo2pontos_i9" type="text" value="0.023"/></div>
-<div class='nomeCampo'>&nbsp</div>
+<div class="nomeCampo">MRC pH maior (pH)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i8" autofocus onfocus="this.focus()" type="text" value="6.859"/></div>
+<div class="nomeCampo">Incerteza pH maior (pH)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i9" type="text" value="0.023"/></div>
+<div class="nomeCampo">&nbsp</div>
 
-<div class='nomeCampo'>MRC pH (menor) <input class='campoEntrada'  id="metodo2pontos_i11" type="text" value="4.007" /></div>
-<div class='nomeCampo'>Incerteza pH (menor) <input class='campoEntrada'  id="metodo2pontos_i12" type="text" value="0.026"/></div>
-<div class='nomeCampo'>&nbsp</div>
+<div class="nomeCampo">MRC pH menor (pH)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i11" type="text" value="4.007" /></div>
+<div class="nomeCampo">Incerteza pH menor (pH)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i12" type="text" value="0.026"/></div>
+<div class="nomeCampo">&nbsp</div>
 
-<div class='nomeCampo'>Leitura 1 pH (maior) em mV <input class='campoEntrada' id="metodo2pontos_i14" type="text" value="-15.1" /></div>
-<div class='nomeCampo'>Leitura 2 pH (maior) em mV <input class='campoEntrada'  id="metodo2pontos_i15" type="text" value="-15.1"/></div>
-<div class='nomeCampo'>Leitura 3 pH (maior) em mV <input class='campoEntrada'  id="metodo2pontos_i16" type="text" value="-15.1"/></div>
-<div class='nomeCampo'>&nbsp</div>
+<div class="nomeCampo">Leitura 1 pH maior (mV)<input class="campoEntrada" onkeyup='verTeclado(this, event)'id="metodo2pontos_i14" type="text" value="-15.1" /></div>
+<div class="nomeCampo">Leitura 2 pH maior (mV)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i15" type="text" value="-15.1"/></div>
+<div class="nomeCampo">Leitura 3 pH maior (mV)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i16" type="text" value="-15.1"/></div>
+<div class="nomeCampo">&nbsp</div>
 
-<div class='nomeCampo'>Leitura 1 pH (menor) em mV <input class='campoEntrada'  id="metodo2pontos_i18" type="text" value="153.8"/></div>
-<div class='nomeCampo'>Leitura 2 pH (menor) em mV <input class='campoEntrada'  id="metodo2pontos_i19" type="text" value="153.8"/></div>
-<div class='nomeCampo'>Leitura 3 pH (menor) em mV <input class='campoEntrada'  id="metodo2pontos_i20" type="text" value="153.8"/></div>
-<div class='nomeCampo'>&nbsp</div>
+<div class="nomeCampo">Leitura 1 pH menor (mV)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i18" type="text" value="153.8"/></div>
+<div class="nomeCampo">Leitura 2 pH menor (mV)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i19" type="text" value="153.8"/></div>
+<div class="nomeCampo">Leitura 3 pH menor (mV)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i20" type="text" value="153.8"/></div>
+<div class="nomeCampo">&nbsp</div>
 
-<div class='nomeCampo'>Leitura 1 pH (X) em mV <input class='campoEntrada'  id="metodo2pontos_i22" type="text" value="153.8"/></div>
-<div class='nomeCampo'>Leitura 2 pH (X) em mV <input class='campoEntrada'  id="metodo2pontos_i23" type="text" value="153.7"/></div>
-<div class='nomeCampo'>Leitura 3 pH (X) em mV <input class='campoEntrada'  id="metodo2pontos_i24" type="text" value="153.6"/></div>
-<!-- <div class='nomeCampo'>&nbsp</div> -->
+<div class="nomeCampo">Leitura 1 pH desconhecido (mv)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i22" type="text" value="153.8"/></div>
+<div class="nomeCampo">Leitura 2 pH desconhecido (mv)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i23" type="text" value="153.7"/></div>
+<div class="nomeCampo">Leitura 3 pH desconhecido (mv)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i24" type="text" value="153.6"/></div>
 
 
-</td></tr></table> <!-- tabela entrada de dados -->
-</td></tr></table> <!-- tabela externa -->
+</td></tr></table>
+<!-- tabela entrada de dados -->
+</td></tr></table>
+<!-- tabela externa -->
 
-<table width="420" bgcolor="#fff" align="center"><tr><td align="center"> <!-- tabela botão -->
-<input class='botao'  type ="button" value='Calcular' onclick="m2p()" />
-</td></tr></table> <!-- tabela botão -->
+<!-- tabela botão calcular -->
+<table width="420" bgcolor="#fff" align="center"><tr><td align="center">
+<input class='botao'  id="botao_calcular" type ="button" value='Calcular' onclick="m2p()" />
+</td></tr></table>
+<!-- tabela botão calcular -->
 
 
 <!-- //////////////////////////////////////////////////////////////// -->
 <!-- tabela resultados -->
-<table id="tabela_resultados" border="0" width="0px" align="center" style="display: none;"><tr><td> 
+<table id="tabela_resultados" border="0" width="0px" align="center" style="display: none;"><tr><td align="center"> 
+
+<!-- tabela cálculo detalhado -->
+<div id="div_calcDetalhado" style="display: none">
+<div class='subtitulo_calcDetalhado'>Cálculo incerteza k'</div>
+<table id="tabela_calcDetalhadoUkLin" class="tabela_calcDetalhado" align="center" border="0" width="0px"></table>
+<div class='nomeCampo'>&nbsp</div>
+<div class='subtitulo_calcDetalhado'>Cálculo incerteza pH X</div>
+<table id="tabela_calcDetalhadoUpHX" class="tabela_calcDetalhado" align="center" border="0" width="0px"></table>
+<div class='nomeCampo'>&nbsp</div>
+</div>
+<!-- tabela cálculo detalhado -->
+
 <div class="subtitulo">Resultados</div>
-<!-- <div class='nomeResultado'>k k' <input class='resultado'  id="resp_1" type="text" /></div> -->
-<!-- <div class='nomeResultado'>U k' <input class='resultado'  id="resp_2" type="text" /></div> -->
-<!-- <div class='nomeResultado'>k pH (X) <input class='resultado'  id="resp_3" type="text" /></div> -->
-<div class='nomeResultado'>pH (X) <input class='resultado'  id="resp_phX" type="text" /></div>
-<div class='nomeResultado'>U pH (X) <input class='resultado'  id="resp_uphX" type="text" /></div>
-<div class='nomeResultado'>&nbsp</div>
+<div class='resultado' id="resp_phX"></div>
+<div class='resultado'id="resp_uphX"></div>
+<div class='nomeCampo'>&nbsp</div>
+
+<!-- tabela botão exibir/ocultar detalhes cálculo -->
+<table width="420" bgcolor="#fff" align="center"><tr><td align="center">
+<input id="botao_calcDetalhado" class="botao_calcDetalhado" type ="button" value='Exibir cálculo detalhado' onclick="ocultaExibeCalc()" />
+</td></tr></table>
+<!-- tabela botão exibir/ocultar detalhes cálculo -->
+
 </td></tr></table>
 <!-- tabela resultados -->
+
+
+
 <!-- //////////////////////////////////////////////////////////////// -->
 
 </body>
