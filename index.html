@@ -21,13 +21,60 @@
 <!-- //////////////////////////////////////////////////////////////// -->
  <!-- tabela configurações -->
 <table id="tabela_configuracoes" class="tabelaConfiguracoes" align="center" border="0" width="0px" style="display: none;"><tr><td>
+
 <div class="subtitulo">Configurações</div>
-<div class="nomeCampo">Resolução em tensão (mv) <input class="campoEntrada" onkeyup='verTeclado(this, event)' id="configuracoes_e5" type="text" value="1"/></div>
-<div class="nomeCampo">Incerteza do termômetro (°C) <input class="campoEntrada" onkeyup='verTeclado(this, event)' id="configuracoes_e6" type="text" value="0,1"/></div>
-<div class="nomeCampo">Variabilidade da temperatura (°C) <input class="campoEntrada" onkeyup='verTeclado(this, event)' id="configuracoes_e7" type="text" value="0,1"/></div>
-<div class="nomeCampo">Não-linearidade da faixa (%) <input class="campoEntrada" onkeyup='verTeclado(this, event)' id="configuracoes_e8" type="text" value="0,1"/></div>
-<div class="nomeCampo">Junção de referência (mV) <input class="campoEntrada" onkeyup='verTeclado(this, event)' id="configuracoes_e9" type="text" value="0,6"/></div>
-</td></tr></table>
+
+<table>
+
+
+  <tr><td>
+  <div class="nomeCampo">Resolução em tensão 
+    <input id="configuracoes_e5" value="1"
+    class="campoEntrada" onkeyup='verTeclado(this, event)' type="text"/>
+  </div>
+  </td><td>
+      <spam class="configuracoes_unidade">(mV)  </spam>
+  </td></tr>
+
+  <tr><td>
+  <div class="nomeCampo">Incerteza do termômetro 
+    <input id="configuracoes_e6" value="0,1"
+    class="campoEntrada" onkeyup='verTeclado(this, event)' type="text"/>
+  </div>
+  </td><td>
+  <spam class="configuracoes_unidade">(°C)  </spam>
+  </td></tr>
+
+  <tr><td>
+  <div class="nomeCampo">Variabilidade da temperatura 
+    <input id="configuracoes_e7" value="0,1"
+    class="campoEntrada" onkeyup='verTeclado(this, event)' type="text"/>
+  </div>
+  </td><td>
+  <spam class="configuracoes_unidade">(°C)  </spam>
+  </td></tr>
+
+  <tr><td>
+  <div class="nomeCampo">Não-linearidade da faixa 
+    <input id="configuracoes_e8" value="0,1"
+    class="campoEntrada" onkeyup='verTeclado(this, event)' type="text"/>
+  </div>
+  </td><td>
+  <spam class="configuracoes_unidade">(%)  </spam>
+  </td></tr>
+
+  <tr><td>
+  <div class="nomeCampo">Junção de referência 
+    <input id="configuracoes_e9" value="0,6"
+    class="campoEntrada" onkeyup='verTeclado(this, event)' type="text"/>
+  </div>
+  </td><td>
+  <spam class="configuracoes_unidade">(mV)  </spam>
+  </td></tr>
+
+</table>
+
+</tr></table>
 <!-- tabela configurações -->
 
  <!-- tabela botão oculta/exibe config -->
@@ -41,29 +88,111 @@
 <table width="360" bgcolor="#eee" align="center"><tr><td align="center"> 
 <!-- tabela entrada de dados -->
 <table border="0" width="0px"><tr><td>
+
 <div class="subtitulo">Entrada de dados</div>
 
-<div class="nomeCampo">MRC pH maior (pH)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i8" autofocus onfocus="this.focus()" type="text" value="6.859"/></div>
-<div class="nomeCampo">Incerteza pH maior (pH)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i9" type="text" value="0.023"/></div>
+<!-- //////////////////////////////// -->
+<!-- dados MRC maior -->
+<div class="nomeCampo">MRC pH maior
+  <input id="metodo2pontos_i8" value="6,859"
+  class="campoEntrada" onkeyup='verTeclado(this, event)' autofocus onfocus="this.focus()" type="text"/>
+  <spam>(pH)</spam>
+</div>
+<div class="nomeCampo">Incerteza pH maior
+  <input id="metodo2pontos_i9" value="0,023"
+  class="campoEntrada" onkeyup='verTeclado(this, event)' type="text"/>
+  <spam>(pH)</spam>
+</div>
 <div class="nomeCampo">&nbsp</div>
+<!-- dados MRC maior -->
 
-<div class="nomeCampo">MRC pH menor (pH)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i11" type="text" value="4.007" /></div>
-<div class="nomeCampo">Incerteza pH menor (pH)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i12" type="text" value="0.026"/></div>
+<!-- //////////////////////////////// -->
+<!-- dados MRC menor -->
+<div class="nomeCampo">MRC pH menor
+  <input id="metodo2pontos_i11" value="4,007"
+  class="campoEntrada" onkeyup='verTeclado(this, event)' type="text"/>
+  <spam>(pH)</spam>
+</div>
+<div class="nomeCampo">Incerteza pH menor
+  <input id="metodo2pontos_i12" value="0,026"
+  class="campoEntrada" onkeyup='verTeclado(this, event)' type="text"/>
+  <spam>(pH)</spam>
+</div>
 <div class="nomeCampo">&nbsp</div>
+<!-- dados MRC menor -->
 
-<div class="nomeCampo">Leitura 1 pH maior (mV)<input class="campoEntrada" onkeyup='verTeclado(this, event)'id="metodo2pontos_i14" type="text" value="-15.1" /></div>
-<div class="nomeCampo">Leitura 2 pH maior (mV)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i15" type="text" value="-15.1"/></div>
-<div class="nomeCampo">Leitura 3 pH maior (mV)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i16" type="text" value="-15.1"/></div>
+<!-- <hr width="86%"> -->
+
+<!-- //////////////////////////////// -->
+<!-- seleciona unidade -->
+<div class = "campo_selecionaUnidade">
+  leituras em: 
+  <input type="radio" id="mV" name="unidadeLeitura" onchange="atualizaCampos()"/>
+  <label for="mV">mV</label>
+  <input type="radio" id="pH" name="unidadeLeitura" onchange="atualizaCampos()" checked/>
+  <label for="pH">pH</label>
+</div>
 <div class="nomeCampo">&nbsp</div>
+<!-- seleciona unidade -->
 
-<div class="nomeCampo">Leitura 1 pH menor (mV)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i18" type="text" value="153.8"/></div>
-<div class="nomeCampo">Leitura 2 pH menor (mV)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i19" type="text" value="153.8"/></div>
-<div class="nomeCampo">Leitura 3 pH menor (mV)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i20" type="text" value="153.8"/></div>
+<!-- //////////////////////////////// -->
+<!-- leitura maior -->
+<div class="nomeCampo">Leitura 1 pH maior 
+  <input id="metodo2pontos_i14" value="7,255"
+  type="text" class="campoEntrada" onkeyup='verTeclado(this, event)'/>
+  <spam class="leitura_unidade">(pH)</spam> 
+</div>
+<div class="nomeCampo">Leitura 2 pH maior 
+  <input id="metodo2pontos_i15" value="7,255"
+  type="text" class="campoEntrada" onkeyup='verTeclado(this, event)'/>
+  <spam class="leitura_unidade">(pH)</spam> 
+</div>
+<div class="nomeCampo">Leitura 3 pH maior 
+  <input id="metodo2pontos_i16" value="7,255"
+  type="text" class="campoEntrada" onkeyup='verTeclado(this, event)'/>
+  <spam class="leitura_unidade">(pH)</spam> 
+</div>
 <div class="nomeCampo">&nbsp</div>
+<!-- leitura maior -->
 
-<div class="nomeCampo">Leitura 1 pH desconhecido (mv)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i22" type="text" value="153.8"/></div>
-<div class="nomeCampo">Leitura 2 pH desconhecido (mv)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i23" type="text" value="153.7"/></div>
-<div class="nomeCampo">Leitura 3 pH desconhecido (mv)<input class="campoEntrada" onkeyup='verTeclado(this, event)' id="metodo2pontos_i24" type="text" value="153.6"/></div>
+<!-- //////////////////////////////// -->
+<!-- leitura menor -->
+<div class="nomeCampo">Leitura 1 pH menor 
+  <input id="metodo2pontos_i18" value="4,400"
+  type="text" class="campoEntrada" onkeyup='verTeclado(this, event)'/>
+  <spam class="leitura_unidade">(pH)</spam> 
+</div>
+<div class="nomeCampo">Leitura 2 pH menor 
+  <input id="metodo2pontos_i19" value="4,400"
+  type="text" class="campoEntrada" onkeyup='verTeclado(this, event)'/>
+  <spam class="leitura_unidade">(pH)</spam> 
+</div>
+<div class="nomeCampo">Leitura 3 pH menor 
+  <input id="metodo2pontos_i20" value="4,400"
+  type="text" class="campoEntrada" onkeyup='verTeclado(this, event)'/>
+  <spam class="leitura_unidade">(pH)</spam> 
+</div>
+<div class="nomeCampo">&nbsp</div>
+<!-- leitura menor -->
+
+<!-- //////////////////////////////// -->
+<!-- leitura x -->
+<div class="nomeCampo">Leitura 1 pH desconhecido 
+  <input id="metodo2pontos_i22" value="4,400"
+  type="text" class="campoEntrada" onkeyup='verTeclado(this, event)'/>
+  <spam class="leitura_unidade">(pH)</spam> 
+</div>
+<div class="nomeCampo">Leitura 2 pH desconhecido 
+  <input id="metodo2pontos_i23" value="4,402"
+  type="text" class="campoEntrada" onkeyup='verTeclado(this, event)'/>
+  <spam class="leitura_unidade">(pH)</spam> 
+</div>
+<div class="nomeCampo">Leitura 3 pH desconhecido
+  <input id="metodo2pontos_i24" value="4,404"
+  type="text" class="campoEntrada" onkeyup='verTeclado(this, event)'/>
+  <spam class="leitura_unidade">(pH)</spam> 
+</div>
+<!-- leitura x -->
 
 
 </td></tr></table>
@@ -73,6 +202,7 @@
 
 <!-- tabela botão calcular -->
 <table width="420" bgcolor="#fff" align="center"><tr><td align="center">
+<input class='botao_exemplos'  id="" type ="button" value='exemplo mV' onclick="exemplo_mv()" /><input class='botao_exemplos'  id="" type ="button" value='exemplo pH' onclick="exemplo_ph()" />
 <input class='botao'  id="botao_calcular" type ="button" value='Calcular' onclick="m2p()" />
 </td></tr></table>
 <!-- tabela botão calcular -->
