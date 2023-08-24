@@ -2,9 +2,14 @@
 
 ////////////////////////////////////////////////////////////////
 // variáveis
-var calculo_c5_R = 8.314462618 // em J/mol*K
-var calculo_c6_F = 96485.33 // em C/mol
-var calculo_c7_T = 25 // em °C
+var calculo_c5_R = 8.314462618; // em J/mol*K
+var constante_gases = calculo_c5_R;
+
+var calculo_c6_F = 96485.33212; // em C/mol
+var constante_faraday = calculo_c6_F;
+
+var calculo_c7_T = 25; // em °C
+var temperaturaSolucao = calculo_c7_T;
 
 var calculo_c11_kPhMaior = 2
 var calculo_c15_kPhMenor = 2
@@ -277,6 +282,96 @@ function matriz2tabela(matriz, id, classe, resResultados){
     destino.innerHTML = codCompleto;
 }
 
+function converte_mV2pH(valor){
+
+    saida = (7-valor)*Math.LN10*constante_gases*(273.15+temperaturaSolucao)*1000/constante_faraday
+    // console.log(valor, saida);
+
+    return saida
+}
+
+function atualizaCampos(){
+    lista = document.getElementsByClassName('leitura_unidade')
+    
+    if (document.getElementById('pH').checked == true){
+        for(var i = 0; i < lista.length; i++){
+            lista[i].innerHTML = '(pH)';
+        }
+    }
+    if (document.getElementById('mV').checked == true){
+        for(var i = 0; i < lista.length; i++){
+            lista[i].innerHTML = '(mV)';
+        }
+
+        document.getElementById('metodo2pontos_i14').value = '0,0';
+        document.getElementById('metodo2pontos_i15').value = '0,0';
+        document.getElementById('metodo2pontos_i16').value = '0,0';
+
+        document.getElementById('metodo2pontos_i18').value = '0,0';
+        document.getElementById('metodo2pontos_i19').value = '0,0';
+        document.getElementById('metodo2pontos_i20').value = '0,0';
+
+        document.getElementById('metodo2pontos_i22').value = '0,0';
+        document.getElementById('metodo2pontos_i23').value = '0,0';
+        document.getElementById('metodo2pontos_i24').value = '0,0';
+    }
+}
+
+function exemplo_mv(){
+    document.getElementById('metodo2pontos_i8').value = '6,859';
+    document.getElementById('metodo2pontos_i9').value = '0,023';
+    
+    document.getElementById('metodo2pontos_i11').value = '4,007';
+    document.getElementById('metodo2pontos_i12').value = '0,026';
+    
+    document.getElementById('metodo2pontos_i14').value = '-15,1';
+    document.getElementById('metodo2pontos_i15').value = '-15,1';
+    document.getElementById('metodo2pontos_i16').value = '-15,1';
+
+    document.getElementById('metodo2pontos_i18').value = '153,8';
+    document.getElementById('metodo2pontos_i19').value = '153,8';
+    document.getElementById('metodo2pontos_i20').value = '153,8';
+
+    document.getElementById('metodo2pontos_i22').value = '153,8';
+    document.getElementById('metodo2pontos_i23').value = '153,7';
+    document.getElementById('metodo2pontos_i24').value = '153,6';
+
+    document.getElementById('mV').checked = true;
+
+    lista = document.getElementsByClassName('leitura_unidade')
+    
+    for(var i = 0; i < lista.length; i++){
+        lista[i].innerHTML = '(mV)';
+    }
+}
+
+function exemplo_ph(){
+    document.getElementById('metodo2pontos_i8').value = '6,859';
+    document.getElementById('metodo2pontos_i9').value = '0,023';
+    
+    document.getElementById('metodo2pontos_i11').value = '4,007';
+    document.getElementById('metodo2pontos_i12').value = '0,026';
+    
+    document.getElementById('metodo2pontos_i14').value = '7,255';
+    document.getElementById('metodo2pontos_i15').value = '7,255';
+    document.getElementById('metodo2pontos_i16').value = '7,255';
+
+    document.getElementById('metodo2pontos_i18').value = '4,400';
+    document.getElementById('metodo2pontos_i19').value = '4,400';
+    document.getElementById('metodo2pontos_i20').value = '4,400';
+
+    document.getElementById('metodo2pontos_i22').value = '4,400';
+    document.getElementById('metodo2pontos_i23').value = '4,402';
+    document.getElementById('metodo2pontos_i24').value = '4,404';
+
+    document.getElementById('pH').checked = true;
+
+    lista = document.getElementsByClassName('leitura_unidade')
+    
+    for(var i = 0; i < lista.length; i++){
+        lista[i].innerHTML = '(pH)';
+    }
+}
 
 ////////////////////////////////////////////////////////////////
 // cálculo método 2 pontos
@@ -288,26 +383,45 @@ function m2p()
 
     //  pH maior
         var phMaior = parseFloat(document.getElementById('metodo2pontos_i8').value.replace(',', '.'));
-        
+        console.log('ph maior', phMaior);
+
         var eMaior = (
             parseFloat(document.getElementById('metodo2pontos_i14').value.replace(',', '.')) +
             parseFloat(document.getElementById('metodo2pontos_i15').value.replace(',', '.')) +
             parseFloat(document.getElementById('metodo2pontos_i16').value.replace(',', '.'))
         )/3;
+        if (document.getElementById('pH').checked == true){
+            eMaior = (
+                converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i14').value.replace(',', '.'))) +
+                converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i15').value.replace(',', '.'))) +
+                converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i16').value.replace(',', '.')))
+            )/3;
+        }
+        console.log('eMaior', eMaior);
 
         var uPhMaior = parseFloat(document.getElementById('metodo2pontos_i9').value.replace(',', '.'));
-
+        console.log('uPhMaior', uPhMaior);
 
     // pH Menor
         var phMenor = parseFloat(document.getElementById('metodo2pontos_i11').value.replace(',', '.'));
-        
+        console.log('phMenor', phMenor);
+
         var eMenor = (
             parseFloat(document.getElementById('metodo2pontos_i18').value.replace(',', '.')) +
             parseFloat(document.getElementById('metodo2pontos_i19').value.replace(',', '.')) +
             parseFloat(document.getElementById('metodo2pontos_i20').value.replace(',', '.'))
         )/3;
+        if (document.getElementById('pH').checked == true){
+            eMenor = (
+                converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i18').value.replace(',', '.'))) +
+                converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i19').value.replace(',', '.'))) +
+                converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i20').value.replace(',', '.')))
+            )/3;
+        }
+        console.log('eMenor', eMenor);
         
         var uPhMenor = parseFloat(document.getElementById('metodo2pontos_i12').value.replace(',', '.'));
+        console.log('uPhMenor', uPhMenor);
 
 
     // E(x)
@@ -316,10 +430,20 @@ function m2p()
             parseFloat(document.getElementById('metodo2pontos_i23').value.replace(',', '.')) +
             parseFloat(document.getElementById('metodo2pontos_i24').value.replace(',', '.'))
         )/3;
+        if (document.getElementById('pH').checked == true){
+            eX = (
+                converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i22').value.replace(',', '.'))) +
+                converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i23').value.replace(',', '.'))) +
+                converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i24').value.replace(',', '.')))
+            )/3;
+        }
+        console.log('eX', eX);
 
         var kLinha = (eMaior - eMenor)/(phMaior - phMenor);
+        console.log('kLinha', kLinha);
 
         var pHx = phMaior - (eMaior - eX)/kLinha;
+        console.log('pHx', pHx);
 
     ////////////////////////////////////////////////////////////////
     // Incerteza k'
@@ -330,6 +454,13 @@ function m2p()
         parseFloat(document.getElementById('metodo2pontos_i15').value.replace(',', '.')),
         parseFloat(document.getElementById('metodo2pontos_i16').value.replace(',', '.'))
     ];
+    if (document.getElementById('pH').checked == true){
+        leituras_eMaior = [
+            converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i14').value.replace(',', '.'))),
+            converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i15').value.replace(',', '.'))),
+            converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i16').value.replace(',', '.')))
+        ];
+    }
     var variabilidade_eMaior_uxi = desvpada(leituras_eMaior);
     var variabilidade_eMaior_div = Math.sqrt(4);
     var variabilidade_eMaior_coef = Math.abs( 1/(phMaior-phMenor) );
@@ -350,6 +481,13 @@ function m2p()
         parseFloat(document.getElementById('metodo2pontos_i19').value.replace(',', '.')),
         parseFloat(document.getElementById('metodo2pontos_i20').value.replace(',', '.'))
     ];
+    if (document.getElementById('pH').checked == true){
+        leituras_eMenor = [
+            converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i18').value.replace(',', '.'))),
+            converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i19').value.replace(',', '.'))),
+            converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i20').value.replace(',', '.')))
+        ];
+    }
     var variabilidade_eMenor_uxi = desvpada(leituras_eMenor);
     var variabilidade_eMenor_div = Math.sqrt(4);
     var variabilidade_eMenor_coef = variabilidade_eMaior_coef;
@@ -598,6 +736,13 @@ function m2p()
         parseFloat(document.getElementById('metodo2pontos_i23').value.replace(',', '.')),
         parseFloat(document.getElementById('metodo2pontos_i24').value.replace(',', '.'))
     ];
+    if (document.getElementById('pH').checked == true){
+        leituras_eX = [
+            converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i22').value.replace(',', '.'))),
+            converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i23').value.replace(',', '.'))),
+            converte_mV2pH(parseFloat(document.getElementById('metodo2pontos_i24').value.replace(',', '.')))
+        ];
+    }
     var variabilidade_eX_uxi = desvpada(leituras_eX);
     var variabilidade_eX_div = Math.sqrt(4);
     var variabilidade_eX_coef = variabilidade_eMaior_coef;
